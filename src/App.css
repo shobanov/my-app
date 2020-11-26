@@ -3,7 +3,7 @@
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-template-areas:
-  "n n"
+  "h h"
   "n c";
 }
 
@@ -24,4 +24,8 @@
 .content {
   grid-area: c;
   background-color: darkgrey;
+}
+
+.content img {
+  width: 1000px;
 }
