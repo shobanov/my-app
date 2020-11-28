@@ -5,27 +5,6 @@
   grid-template-areas:
   "h h"
   "n c";
-}
-
-.header {
-  grid-area: h;
-  background-color: chartreuse;
-}
-
-.header img {
-  width: 20px;
-}
-
-.nav {
-  grid-area: n;
-  background-color: cornflowerblue;
-}
-
-.content {
-  grid-area: c;
-  background-color: darkgrey;
-}
-
-.content img {
-  width: 1000px;
+  width: 1200px;
+  margin: 0 auto;
 }
