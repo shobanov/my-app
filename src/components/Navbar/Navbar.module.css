@@ -6,7 +6,3 @@
 .item {
   color: white;
 }
-
-.item.active {
-  color: rgb(39, 235, 13);
-}

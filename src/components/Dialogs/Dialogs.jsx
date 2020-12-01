@@ -1,6 +1,5 @@
 import React from 'react';
-// import s from './Dialogs.module.css';
-import Dialogs from './Dialogs/Dialogs';
+import s from './Dialogs.module.css';
 
 const Dialogs = (props) => {
     return (
