@@ -1,17 +1,16 @@
 import React from 'react';
-// import s from './Profile.module.css';
+//import s from './Profile.module.css';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPosts from './MyPosts/MyPosts';
 
 const Profile = () => {
-    return  <div>
-                <div>
-                    <img src='https://www.grekomania.ru/images/news/2017/tourism/5463_elafonisi.jpg'/>
-                </div>
-                <div>
-                    ava+description
-                </div> 
-                <MyPosts />       
-            </div>
+    return  (
+      <div>
+        <ProfileInfo />  
+        <MyPosts />      
+      </div>
+    ) 
+                
 }
 
 export default Profile;
