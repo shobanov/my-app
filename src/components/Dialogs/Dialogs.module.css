@@ -5,17 +5,14 @@
 
 .dialog a {
   text-decoration: none;
+  color: white;
 }
 
 .dialogsItems {
   padding: 10px;
-  
 }
 
 .messages {
   padding: 10px;
-}
-
-.message {
-
+  color: white;
 }
