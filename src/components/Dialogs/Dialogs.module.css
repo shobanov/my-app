@@ -12,6 +12,11 @@
   padding: 10px;
 }
 
+.dialogsItems img {
+  border-radius: 50%;
+  width: 30px;
+}
+
 .messages {
   padding: 10px;
   color: white;

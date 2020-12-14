@@ -1,5 +1,5 @@
 let state = {
-
+  
   profilePage: {
     posts: [
       {id: 1, message: 'Hi, how are you?', likesCount: 12},
@@ -10,7 +10,7 @@ let state = {
   dialogsPage: {
     dialogs: [
       { id: 1, name: 'Aleksey' },
-      { id: 2, name: 'Sveta' }
+      { id: 2, name: 'Anna' }
     ],
     
     messages: [
