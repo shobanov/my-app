@@ -10,5 +10,5 @@ export let rerenderEntireTree = (state) => {
     <BrowserRouter>
       <App state={state} addPost={addPost} />
     </BrowserRouter>,
-    document.getElementById('root'));
+    document.getElementById('root')); // точка входа приложения (обращение к index.html)
 }
