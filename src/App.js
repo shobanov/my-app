@@ -23,3 +23,7 @@ const App = (props) => {
 }
 
 export default App;
+
+/*
+ Модуль Route отрисовывает конкретную компоненту при изменении url (path)
+*/
