@@ -4,11 +4,11 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-  let newPostElement = React.createRef();
+  let newPostElement = React.createRef(); //метод реакта createRef, который создаёт ссылку(пока ссылается не на что)
 
   let addPost = () => {
-    let text = newPostElement.current.value;
-    props.addPost(text);
+    let text = newPostElement.current.value; // ссылка newPostElement явл. объектом, у неё есть св-во
+    props.addPost(text);                     // current(ссылается на нативный HTML элемент)
     newPostElement.current.value = '';
   }
 
@@ -18,7 +18,7 @@ const MyPosts = (props) => {
         <h3>My posts</h3>
           <div>
             <div>
-              <textarea ref={newPostElement}></textarea>
+              <textarea ref={newPostElement}></textarea> // привязываем ссылку к textarea с помощью констр. ref={newPostElement}
             </div>
             <div>
               <button onClick={addPost} >Add post</button>
@@ -32,3 +32,7 @@ const MyPosts = (props) => {
 }
 
 export default MyPosts;
+
+/*
+С помощью ref стучимся напрямую в DOM(чего React рекомендует избегать)
+*/
