@@ -22,13 +22,14 @@ let state = {
   }
 }
 
-export let addPost = (postMessage) => {
+export let addPost = (postMessage) => { // экспорт перем. без дефолта / (postMessage)-Любое слово
+  debugger;
   let newPost = {
     id: 5,
-    message: postMessage,
+    message: postMessage, // postMessage - то что придёт в пар-ах перем. addPost
     likesCount: 0
   };
-  state.profilePage.posts.push (newPost);
+  state.profilePage.posts.push (newPost); // .push доб. в конец массива (posts) новый эл. массива (newPost)
   rerenderEntireTree(state);
 }
 

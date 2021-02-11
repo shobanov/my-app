@@ -5,10 +5,14 @@ import App from '../App';
 import {addPost} from './state';
 import {BrowserRouter} from 'react-router-dom';
 
-export let rerenderEntireTree = (state) => {
+export let rerenderEntireTree = (state) => { // ф-ция переотресовки дерева при изменении state для его актуальности
   ReactDOM.render(
     <BrowserRouter>
       <App state={state} addPost={addPost} />
     </BrowserRouter>,
     document.getElementById('root')); // точка входа приложения (обращение к index.html)
 }
+
+/* внедряем третьего игрока - render.js что бы избежать циклической зависимости, т.к
+index.js имортирует state.js и по этому мы не можем rerenderEntireTree ипортировать из index.js
+*/
