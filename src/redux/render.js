@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../index.css';
 import App from '../App';
-import {addPost} from './state';
+import {addPost, updateNewPostText} from './state';
 import {BrowserRouter} from 'react-router-dom';
 
 export let rerenderEntireTree = (state) => { // ф-ция переотресовки дерева при изменении state для его актуальности
   ReactDOM.render(
     <BrowserRouter>
-      <App state={state} addPost={addPost} />
+      <App state={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
     </BrowserRouter>,
     document.getElementById('root')); // точка входа приложения (обращение к index.html)
 }
