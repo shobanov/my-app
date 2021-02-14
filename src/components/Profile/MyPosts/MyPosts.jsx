@@ -7,10 +7,10 @@ const MyPosts = (props) => {
   let newPostElement = React.createRef(); //метод реакта createRef, который создаёт ссылку(пока ссылается не на что)
 
   let addPostButton = () => {
-    props.addPost();                     // current(ссылается на нативный HTML элемент)
+    props.addPost();
   }
 
-  let onPostChange = () => {
+  let onPostChange = () => {                        //ф-ция для обработчика событий
     let text = newPostElement.current.value;
     props.updateNewPostText(text);
   }
@@ -21,13 +21,13 @@ const MyPosts = (props) => {
         <h3>My posts</h3>
           <div>
             <div>
-              <textarea onChange={onPostChange}
-                        ref={newPostElement} /* привязываем ссылку к textarea с помощью констр. ref={newPostElement} */
+              <textarea onChange={onPostChange}     //обработчик событий 
+                        ref={newPostElement}        //привязываем ссылку к textarea с помощью констр. ref={newPostElement}
                         value={props.newPostText}>
               </textarea>
             </div>
             <div>
-              <button onClick={addPostButton}>Add post</button>
+              <button onClick={addPostButton}>Add post</button> {/*обработчик клика*/}
             </div>
           </div>
             <div className={s.posts}>

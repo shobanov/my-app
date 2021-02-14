@@ -1,4 +1,8 @@
-import {rerenderEntireTree} from './render'
+  // Добиваемся того, что-бы в state из index ничего не импортировать. 
+  
+  let getRerender = () => { //2) Нашли, заходим в subscribe (потому что можем блять и всё тут)
+     
+  }
 
 let state = {
   
@@ -7,7 +11,7 @@ let state = {
       {id: 1, message: 'Hi, how are you?', likesCount: 12},
       {id: 2, message: 'Runs the app in the development mode', likesCount: 32}
     ],
-    newPostText: 'It Kamasutra'
+    newPostText: ''
   },
   
   dialogsPage: {
@@ -23,20 +27,27 @@ let state = {
   }
 }
 
-export let addPost = () => {
+export const addPost = () => {
   let newPost = {
     id: 5,
-    message: state.profilePage.newPostText, // postMessage - то что придёт в пар-ах перем. addPost
+    message: state.profilePage.newPostText,
     likesCount: 0
   };
-  state.profilePage.posts.push (newPost); // .push доб. в конец массива (posts) новый эл. массива (newPost)
+  state.profilePage.posts.push (newPost);
   state.profilePage.newPostText = '';
-  rerenderEntireTree(state);
+  getRerender(state); //1) тут происходит замыкание, мы выпрыгиваем вверх и ищем эту ф-цию 
 }
 
-export let updateNewPostText = (newText) => {
-  state.profilePage.newPostText = newText;
-  rerenderEntireTree(state);
+export const updateNewPostText = (userText) => {  // userText(название параметра важно только тут) приходит из ф-ции onPostChange
+  state.profilePage.newPostText = userText;
+  getRerender(state); //1)
+}
+/*
+subscribe может вызвать тот кто её импортирует и передать внутрь другую функцию.
+это кстати паттерн - "observer"
+*/
+export const subscribe = (observer) => { // в subscribe сидит параметр rerenderEntireTree
+  getRerender = observer; //3) всё, пиздец, придётся переотрисовать
 }
 
 export default state;
