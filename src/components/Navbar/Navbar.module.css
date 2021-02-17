@@ -1,14 +1,22 @@
 .nav {
   grid-area: n;
-  background-color: rgb(212, 183, 16);
+  background: #a9e1fa;
   padding: 20px;
 }
 
 .item a {
-  color: white;
+  display: inline-block;
+  color: #2d6c90;
   text-decoration: none;
+  position: relative;
+  padding: 14px 0;
+  font-family: 'Muli', sans-serif;
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: 0.040em;
 }
 
 .item a.activLink {
-    color: rgb(25, 32, 133);
+    color: rgb(34, 212, 87);
 }
