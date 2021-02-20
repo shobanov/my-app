@@ -1,6 +1,3 @@
-// Добиваемся того, что-бы в store из index ничего не импортировать.
-// Все функции и все переменные упаковываем в один объект store
-
 let store = {  
   _state: {  // является приватным свойством
     profilePage: {
@@ -23,38 +20,42 @@ let store = {
     }
   },
 
+  _getRerender () {
+  },
+
   getState() {  // гетер, задача кот. возвр. _state(т.к. к нему нельзя обращ. на прямую)
-    return this._state;  // к св-ву или методу объекта нужно обр. через ключ. слово .this (т.к. имя пер. может меняться)
+    return this._state; 
   },
 
-  _getRerender () {  //2) Нашли, заходим в subscribe (потому что можем блять и всё тут) | это теперь метод объекта store
-
-  },
-  
-  addPost () {  //теперь ты метод
-    let newPost = {
-      id: 5,
-      message: this._state.profilePage.newPostText,
-      likesCount: 0
-    };
-    this._state.profilePage.posts.push (newPost);
-    this._state.profilePage.newPostText = '';
-    this._state._getRerender(this._state);     //1) тут происходит замыкание, мы выпрыгиваем вверх и ищем эту ф-цию 
+    subscribe (observer) {  // в subscribe сидит пар-р rerenderEntireTree
+    this._state._getRerender = observer;
   },
 
-  updateNewPostText (userText) {  // userText(имя параметра важно только тут) приходит из ф-ции onPostChange(MyPosts.jsx)
-    this._state.profilePage.newPostText = userText;
-    this._state._getRerender (this._state); //1)
-  },
-
-  subscribe (observer) {  // в subscribe сидит пар-р rerenderEntireTree
-    this._state._getRerender = observer; //3) всё, пиздец, придётся переотрисовать
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      let newPost = {
+        id: 5,
+        message: this._state.profilePage.newPostText,
+        likesCount: 0
+      };
+      this._state.profilePage.posts.push (newPost);
+      this._state.profilePage.newPostText = '';
+      this._state._getRerender(this._state);
+    } else if (action.type === 'APDATE-NEW-POST-TEXT') {
+        this._state.profilePage.newPostText = action.text; // каждому action нужны св-ва что бы выполнить операцию.
+        this._state._getRerender (this._state);
+      }
   }
 }
-  
+
+export const myPostActionCreater = () => ({ type: 'ADD-POST' })
+
+export const apdateNewPostTextActionCreater = (textFromUserPost) =>
+  ({ type: 'APDATE-NEW-POST-TEXT', text: textFromUserPost })
+
 /*
 subscribe может вызвать тот кто её импортирует и передать внутрь другую функцию.
-это кстати паттерн - "observer"
+это паттерн - "observer"
 */
 
 export default store;
