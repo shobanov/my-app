@@ -1,5 +1,9 @@
+const ADD_POST = 'ADD-POST';
+const APDATE_NEW_POST_TEXT = 'APDATE-NEW-POST-TEXT';
+const APDATE_NEW_MESSAGE_BODY = 'APDATE-NEW-MESSAGE-BODY';
+
 let store = {  
-  _state: {  // является приватным свойством
+  _state: { 
     profilePage: {
       posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 12},
@@ -16,14 +20,15 @@ let store = {
       messages: [
         { id: 1, message: 'Hi' },
         { id: 2, message: 'How are you?' }
-      ]
+      ],
+      newMessage: ''
     }
   },
 
   _getRerender () {
   },
 
-  getState() {  // гетер, задача кот. возвр. _state(т.к. к нему нельзя обращ. на прямую)
+  getState() {
     return this._state; 
   },
 
@@ -42,16 +47,25 @@ let store = {
       this._state.profilePage.newPostText = '';
       this._state._getRerender(this._state);
     } else if (action.type === 'APDATE-NEW-POST-TEXT') {
-        this._state.profilePage.newPostText = action.text; // каждому action нужны св-ва что бы выполнить операцию.
+        this._state.profilePage.newPostText = action.input;
         this._state._getRerender (this._state);
-      }
+    } else if (action.type === 'APDATE-NEW-MESSAGE-BODY') {
+        this._state.dialogsPage.newMessage = action.input;
+        this._state._getRerender (this._state);
+    } else if (action.type === 'SEND-MESSAGE') {
+        let userMessage = this._state.dialogsPage.newMessage;
+        this._state.dialogsPage.newMessage = '';
+        this._state.dialogsPage.messages.push({id: 6, message: userMessage});
+        this._state._getRerender (this._state);
+    }
   }
 }
 
 export const myPostActionCreater = () => ({ type: 'ADD-POST' })
+export const apdateNewPostTextActionCreater = (textFromUserPost) => ({ type: 'APDATE-NEW-POST-TEXT', input: textFromUserPost })
 
-export const apdateNewPostTextActionCreater = (textFromUserPost) =>
-  ({ type: 'APDATE-NEW-POST-TEXT', text: textFromUserPost })
+export const sendMessageCreater = () => ({ type: 'SEND-MESSAGE' })
+export const apdateNewMessageBodyCreater = (userMessage) => ({ type: 'APDATE-NEW-MESSAGE-BODY', input: userMessage })
 
 /*
 subscribe может вызвать тот кто её импортирует и передать внутрь другую функцию.

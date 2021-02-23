@@ -6,12 +6,12 @@ import App from './App';
 import store from './redux/state';
 import {BrowserRouter} from 'react-router-dom';
 
-export let rerenderEntireTree = () => { // ф-ция переотресовки дерева при изменении state для его актуальности
+export let rerenderEntireTree = () => {
   ReactDOM.render (
     <BrowserRouter>
-      <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+      <App state={store.getState()} dispatch={store.dispatch.bind(store)} store={store} />
     </BrowserRouter>,
-    document.getElementById('root')); // точка входа приложения (обращение к index.html)
+    document.getElementById('root'));
 }
 
 rerenderEntireTree(store.getState());
