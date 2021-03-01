@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from './DialogsItem/DialogsItem';
 import Message from './Message/Message';
-import {sendMessageCreater, apdateNewMessageBodyCreater} from '../../redux/state';
+import {sendMessageActionCreater, apdateNewMessageActionCreater} from '../../redux/state';
 
 
 const Dialogs = (props) => {
@@ -14,12 +14,12 @@ const Dialogs = (props) => {
   let newMessage = state.newMessage;
 
   let sendClick = () => {
-    props.store.dispatch(sendMessageCreater());
+    props.store.dispatch(sendMessageActionCreater()); // внутри события диспатчим в BLL, данные там меняются, приходят новые пропсы с новым value и отображаются
   };
 
-  let onNewMessageChange = (event) => {
-    let userMessage = event.target.value;
-    props.store.dispatch(apdateNewMessageBodyCreater(userMessage));
+  let onNewMessageChange = (event) => { // textarea передаёт сюда объект события event
+    let userMessage = event.target.value; // записываем в userMessage текущее значение в textarea
+    props.store.dispatch(apdateNewMessageActionCreater(userMessage)); // userMessage диспатчим в action
   };
 
   return (
@@ -31,9 +31,8 @@ const Dialogs = (props) => {
         <div>{messagesElements}</div>
         <div>
           <div>
-            <textarea value={newMessage}
-                      onChange={onNewMessageChange}
-                      placeholder='Enter your message'>
+            <textarea value={newMessage} 
+                      onChange={onNewMessageChange}> { /* textarea вызывает эту ф-цию когда в ней происходят изменения */ }
             </textarea>
           </div>
           <div>

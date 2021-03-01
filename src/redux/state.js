@@ -1,6 +1,5 @@
 const ADD_POST = 'ADD-POST';
 const APDATE_NEW_POST_TEXT = 'APDATE-NEW-POST-TEXT';
-const APDATE_NEW_MESSAGE_BODY = 'APDATE-NEW-MESSAGE-BODY';
 
 let store = {  
   _state: { 
@@ -36,7 +35,7 @@ let store = {
     this._state._getRerender = observer;
   },
 
-  dispatch(action) {
+  dispatch(action) { // action это объект у которого как минимум есть св-во type
     if (action.type === 'ADD-POST') {
       let newPost = {
         id: 5,
@@ -50,22 +49,24 @@ let store = {
         this._state.profilePage.newPostText = action.input;
         this._state._getRerender (this._state);
     } else if (action.type === 'APDATE-NEW-MESSAGE-BODY') {
-        this._state.dialogsPage.newMessage = action.input;
-        this._state._getRerender (this._state);
+        this._state.dialogsPage.newMessage = action.input; // newMessage равен тому что приходит в action
+        this._state._getRerender (this._state); 
     } else if (action.type === 'SEND-MESSAGE') {
-        let userMessage = this._state.dialogsPage.newMessage;
-        this._state.dialogsPage.newMessage = '';
-        this._state.dialogsPage.messages.push({id: 6, message: userMessage});
-        this._state._getRerender (this._state);
+        let userMessage = this._state.dialogsPage.newMessage; // записали в userMessage то что ввели
+        this._state.dialogsPage.newMessage = '';  // обнулили
+        this._state.dialogsPage.messages.push({id: 3, message: userMessage}); // пушим в массив messages новый элемент
+        this._state._getRerender (this._state); // Вызываем переотрисовку и передаём изменившийся стейт
     }
   }
 }
 
+// создаём actions что бы их задиспатчить, а диспатч их обрабатывает.
+
 export const myPostActionCreater = () => ({ type: 'ADD-POST' })
 export const apdateNewPostTextActionCreater = (textFromUserPost) => ({ type: 'APDATE-NEW-POST-TEXT', input: textFromUserPost })
 
-export const sendMessageCreater = () => ({ type: 'SEND-MESSAGE' })
-export const apdateNewMessageBodyCreater = (userMessage) => ({ type: 'APDATE-NEW-MESSAGE-BODY', input: userMessage })
+export const sendMessageActionCreater = () => ({ type: 'SEND-MESSAGE' })
+export const apdateNewMessageActionCreater = (userMessage) => ({ type: 'APDATE-NEW-MESSAGE-BODY', input: userMessage }) // userMessage локальная пер-ая
 
 /*
 subscribe может вызвать тот кто её импортирует и передать внутрь другую функцию.
