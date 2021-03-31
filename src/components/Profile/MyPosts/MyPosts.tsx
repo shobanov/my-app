@@ -1,9 +1,14 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {myPostActionCreater, apdateNewPostTextActionCreater} from "../../../redux/state";
+import {myPostActionCreater, apdateNewPostTextActionCreater, ActionType, ProfilePageType} from "../../../redux/state";
 
-const MyPosts = (props) => {
+type PropsType = {
+  dispatch: (action: ActionType) => void
+  posts: ProfilePageType
+}
+
+const MyPosts: React.FC<PropsType> = (props) => {
 
   let newPostElement = React.createRef(); //метод реакта createRef, который создаёт ссылку(пока ссылается ни на что)
 

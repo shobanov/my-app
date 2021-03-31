@@ -1,5 +1,4 @@
 import reportWebVitals from './reportWebVitals';
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -14,7 +13,7 @@ export let rerenderEntireTree = () => {
     document.getElementById('root'));
 }
 
-rerenderEntireTree(store.getState());
+rerenderEntireTree();
 
 /* 
 Вызываем ф-цию из того мира, и передаём ей то что мы хотим отдать тому миру.
