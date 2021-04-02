@@ -76,11 +76,11 @@ let store: StoreType = {
     return this.state; 
   },
 
-  subscribe (observer) {  // в subscribe сидит пар-р rerenderEntireTree
+  subscribe (observer) {
     this.state._getRerender = observer
   },
 
-  dispatch(action: ActionType)  {// action это объект у которого как минимум есть св-во type
+  dispatch(action: ActionType)  {
     if (action.type === 'ADD-POST') {
       let newPost = {
         id: 5,
@@ -94,28 +94,23 @@ let store: StoreType = {
         this.state.profilePage.newPostText = action.payload
         this.state._getRerender (this.state)
     } else if (action.type === 'APDATE-NEW-MESSAGE-BODY') {
-        this.state.dialogsPage.newMessage = action.payload; // newMessage равен тому что приходит в action
+        this.state.dialogsPage.newMessage = action.payload; 
         this.state._getRerender (this.state)
     } else if (action.type === 'SEND-MESSAGE') {
-        let userMessage = this.state.dialogsPage.newMessage; // записали в userMessage то что ввели
-        this.state.dialogsPage.newMessage = '' // обнулили
-        this.state.dialogsPage.messages.push({id: 3, message: userMessage}) // пушим в массив messages новый элемент
-        this.state._getRerender (this.state) // Вызываем переотрисовку и передаём изменившийся стейт
+        let userMessage = this.state.dialogsPage.newMessage;
+        this.state.dialogsPage.newMessage = ''
+        this.state.dialogsPage.messages.push({id: 3, message: userMessage})
+        this.state._getRerender (this.state)
     }
   }
 }
 
-// создаём actions что бы их задиспатчить, а диспатч их обрабатывает.
 
 export const myPostActionCreater = () => ({ type: 'ADD-POST' })
 export const apdateNewPostTextActionCreater = (textFromUserPost: string) => ({ type: 'APDATE-NEW-POST-TEXT', payload: textFromUserPost })
 
 export const sendMessageActionCreater = () => ({ type: 'SEND-MESSAGE' })
-export const apdateNewMessageActionCreater = (userMessage: string) => ({ type: 'APDATE-NEW-MESSAGE-BODY', payload: userMessage }) // userMessage локальная пер-ая
+export const apdateNewMessageActionCreater = (userMessage: string) => ({ type: 'APDATE-NEW-MESSAGE-BODY', payload: userMessage })
 
-/*
-subscribe может вызвать тот кто её импортирует и передать внутрь другую функцию.
-это паттерн - "observer"
-*/
 
 export default store;

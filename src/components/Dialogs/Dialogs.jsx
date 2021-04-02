@@ -14,12 +14,12 @@ const Dialogs = (props) => {
   let newMessage = state.newMessage;
 
   let sendClick = () => {
-    props.store.dispatch(sendMessageActionCreater()); // внутри события диспатчим в BLL, данные там меняются, приходят новые пропсы с новым value и отображаются
+    props.store.dispatch(sendMessageActionCreater());
   };
 
-  let onNewMessageChange = (event) => { // textarea передаёт сюда объект события event
-    let userMessage = event.target.value; // записываем в userMessage текущее значение в textarea
-    props.store.dispatch(apdateNewMessageActionCreater(userMessage)); // userMessage диспатчим в action
+  let onNewMessageChange = (event) => { 
+    let userMessage = event.target.value;
+    props.store.dispatch(apdateNewMessageActionCreater(userMessage));
   };
 
   return (
@@ -32,7 +32,7 @@ const Dialogs = (props) => {
         <div>
           <div>
             <textarea value={newMessage} 
-                      onChange={onNewMessageChange}> { /* textarea вызывает эту ф-цию когда в ней происходят изменения */ }
+                      onChange={onNewMessageChange}>
             </textarea>
           </div>
           <div>

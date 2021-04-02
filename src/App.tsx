@@ -30,7 +30,3 @@ const App: React.FC<PropsType> = (props) => {
 }
 
 export default App;
-
-/*
- Модуль Route отрисовывает конкретную компоненту при изменении url (path)
-*/
