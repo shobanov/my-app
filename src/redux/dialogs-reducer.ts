@@ -1,6 +1,6 @@
-import { IAction, IState } from "./state";
+// import { IAction, IState } from "./state";
 
-export const dialogsReducer = (state: IState, action: IAction) => {
+export const dialogsReducer = (state: any, action: any) => {
 
 
     return state;

@@ -1,35 +1,41 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {myPostActionCreater, apdateNewPostTextActionCreater, ActionType, ProfilePageType} from "../../../redux/state";
+import {apdateNewPostTextActionCreater, ActionsTypes, PostType} from "../../../redux/state";
 
 type PropsType = {
-  dispatch: (action: ActionType) => void
-  posts: ProfilePageType
+  dispatch: (action: ActionsTypes) => void
+  posts: Array<PostType>
+  newPostText: string 
 }
 
 const MyPosts: React.FC<PropsType> = (props) => {
 
-  let newPostElement = React.createRef(); //метод реакта createRef, который создаёт ссылку(пока ссылается ни на что)
+  const newPostElement = React.createRef<HTMLTextAreaElement>(); 
 
-  let addPostButton = () => {
-    props.dispatch(myPostActionCreater());
+  const addPostButton = () => {
+    props.dispatch({type: 'ADD-POST', newPostText: props.newPostText});
   }
 
-  let onPostChange = () => {
-    let textFromUserPost = newPostElement.current.value;
-    let action = apdateNewPostTextActionCreater(textFromUserPost);
-    props.dispatch(action);
+  const onPostChange = () => {
+    const textareaRef = newPostElement.current;
+
+    if (textareaRef) {
+      let textFromUserPost = textareaRef.value;
+      let action = apdateNewPostTextActionCreater(textFromUserPost);
+      props.dispatch(action);
+    }
   }
 
-  let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} />);
+  const postsElements = props.posts && props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />);
+
     return ( 
       <div className={s.postsBlock}>
         <h3>My posts</h3>
           <div>
             <div>
-              <textarea onChange={onPostChange}     //обработчик событий 
-                        ref={newPostElement}        //привязываем ссылку к textarea
+              <textarea onChange={onPostChange}     
+                        ref={newPostElement}
                         value={props.newPostText}>
               </textarea>
             </div>
@@ -45,7 +51,3 @@ const MyPosts: React.FC<PropsType> = (props) => {
 }
 
 export default MyPosts;
-
-/*
-С помощью ref стучимся напрямую в DOM(чего React рекомендует избегать)
-*/

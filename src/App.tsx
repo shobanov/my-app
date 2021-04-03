@@ -4,17 +4,18 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
-import {StateType, ActionType, StoreType, ProfilePageType} from './redux/state';
-
+import {ActionsTypes, StoreType, PostType} from './redux/state';
 
 type PropsType = {
-  state: StateType
-  dispatch: (action: ActionType) => void
+  dispatch: (action: ActionsTypes) => void
   store: StoreType
-  profilePage: ProfilePageType
+  newPostText: string
+  posts: Array<PostType> 
+  state: any
 }
 
 const App: React.FC<PropsType> = (props) => {
+
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -22,7 +23,7 @@ const App: React.FC<PropsType> = (props) => {
         <Navbar />
         <div className='app-wrapper-content'>
           <Route path='/dialogs' render= { () => <Dialogs store={props.store} /> } />
-          <Route path='/profile' render={ () => <Profile profilePage={props.profilePage} dispatch={props.dispatch} /> } />
+          <Route path='/profile' render={ () => <Profile dispatch={props.dispatch} newPostText={props.newPostText} posts={props.posts} /> } />
         </div>
       </div>
     </BrowserRouter>
