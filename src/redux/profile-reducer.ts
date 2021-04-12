@@ -1,4 +1,4 @@
-import {ActionsTypes, UpdateNewPostTextActionType} from './state'
+import {ActionsTypes, UpdateNewPostTextActionType} from './store'
 
 const profileReducer = (state: any, action: ActionsTypes) => {
   switch (action.type) {
