@@ -1,6 +1,18 @@
 import {ActionsTypes} from './store'
 
-const dialogsReducer = (state: any, action: ActionsTypes) => {
+let initionalState = {
+    dialogs: [
+        { id: 1, name: 'Aleksey' },
+        { id: 2, name: 'Anna' }
+      ],
+      messages: [
+        { id: 1, message: 'Hi' },
+        { id: 2, message: 'How are you?' }
+      ],
+      newMessage: ''
+}
+
+const dialogsReducer = (state = initionalState, action: ActionsTypes) => {
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-BODY':
             state.newMessage = action.payload

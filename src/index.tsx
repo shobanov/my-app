@@ -6,22 +6,25 @@ import store from './redux/redux-store';
 import {BrowserRouter} from 'react-router-dom';
 
 
-export let rerenderEntireTree = () => {
+export let rerenderEntireTree = (state: any) => {
   ReactDOM.render (
     <BrowserRouter>
       <App  state={store.getState()} 
             dispatch={store.dispatch.bind(store)}
-            store={store} 
-            newPostText={store.getState().profilePage.newPostText}
-            posts={store.getState().profilePage.posts}
+            store={store.getState()} 
+            newPostText={state.profilePage.newPostText}
+            posts={state.profilePage.posts}
       />
     </BrowserRouter>,
     document.getElementById('root'));
 }
 
-rerenderEntireTree();
+rerenderEntireTree(store.getState());
 
 
-store.subscribe(rerenderEntireTree);
+store.subscribe( () => {
+  let state = store.getState();
+  rerenderEntireTree(state);
+});
 
 reportWebVitals();
